@@ -9,6 +9,7 @@ resource "aws_rds_cluster" "this" {
   database_name           = var.db_name
   master_username         = var.db_master_username
   master_password         = var.db_master_password
+  storage_encrypted       = true
   backup_retention_period = var.db_backup_retention_days
   preferred_backup_window = var.db_backup_window
   serverlessv2_scaling_configuration {
