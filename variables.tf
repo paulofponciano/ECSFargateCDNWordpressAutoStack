@@ -93,12 +93,12 @@ variable "db_backup_window" {
 
 variable "db_max_capacity" {
   description = "The maximum Aurora capacity unit."
-  default     = "2"
+  default     = "2.0"
 }
 
 variable "db_min_capacity" {
   description = "The minimum Aurora capacity unit."
-  default     = "1"
+  default     = "1.0"
 }
 
 variable "db_name" {
@@ -117,17 +117,7 @@ variable "db_master_password" {
 
 variable "db_engine_version" {
   description = "The database engine version."
-  default     = "5.7.2"
-}
-
-variable "db_auto_pause" {
-  description = "Whether to enable auto pause."
-  default     = true
-}
-
-variable "db_seconds_until_auto_pause" {
-  description = "The time in seconds before Aurora DB is paused."
-  default     = 300
+  default     = "8.0.mysql_aurora.3.02.0"
 }
 
 # Task parameters
