@@ -35,7 +35,7 @@ resource "aws_lb_listener_rule" "wordpress" {
 }
 
 /*resource "aws_lb_listener_rule" "default_action" {
-  load_balancer_arn = module.alb.aws_lb.this.arn
+  load_balancer_arn = module.alb.https_listener_arns[0]
   priority          = 100
 
   action {
