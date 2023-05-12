@@ -6,16 +6,27 @@ resource "aws_cloudfront_origin_access_control" "wordpress" {
   signing_protocol                  = "sigv4"
 }
 
+resource "random_string" "custom_header_alb" {
+  length  = 8
+  special = true
+}
+
 resource "aws_cloudfront_distribution" "this" {
   origin {
     domain_name = var.public_alb_domain
     origin_id   = "alb"
+
+    custom_header {
+      name  = "X-Custom-Secret"
+      value = random_string.custom_header_alb.result
+    }
 
     custom_origin_config {
       http_port              = 80
       https_port             = 443
       origin_protocol_policy = "https-only"
       origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
+
     }
   }
 

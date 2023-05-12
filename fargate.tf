@@ -195,35 +195,6 @@ resource "aws_cloudwatch_log_group" "wordpress" {
   retention_in_days = var.log_retention_in_days
 }
 
-resource "aws_lb_target_group" "this" {
-  name        = "${var.env_prefix}-${var.environment}"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "ip"
-  vpc_id      = module.vpc.vpc_id
-  health_check {
-    path    = "/"
-    matcher = "200,302"
-  }
-
-}
-
-resource "aws_lb_listener_rule" "wordpress" {
-  listener_arn = module.alb.https_listener_arns[0]
-  priority     = 100
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.this.arn
-  }
-
-  condition {
-    host_header {
-      values = [var.site_domain, var.public_alb_domain]
-    }
-  }
-}
-
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_high" {
   alarm_name          = "${var.env_prefix}-high-CPU-utilization-ecs-${var.environment}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
