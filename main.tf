@@ -20,6 +20,14 @@ module "alb" {
       "certificate_arn" = module.acm_alb.this_acm_certificate_arn
       "port"            = 443
     },
+    {
+      action_type = "fixed-response"
+      fixed_response = {
+        content_type = "text/plain"
+        message_body = "unauthorized"
+        status_code  = "403"
+      }
+    },
   ]
 
   target_groups = [

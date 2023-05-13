@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "this" {
 
 resource "aws_lb_listener_rule" "wordpress" {
   listener_arn = module.alb.https_listener_arns[0]
-  priority     = 99
+  priority     = 100
 
   action {
     type             = "forward"
@@ -33,18 +33,3 @@ resource "aws_lb_listener_rule" "wordpress" {
     }
   }
 }
-
-/*resource "aws_lb_listener_rule" "default_action" {
-  load_balancer_arn = module.alb.https_listener_arns[0]
-  priority          = 100
-
-  action {
-    type = "fixed-response"
-
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "unauthorized"
-      status_code  = "403"
-    }
-  }
-}*/
