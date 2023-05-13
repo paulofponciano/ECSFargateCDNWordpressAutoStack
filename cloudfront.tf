@@ -42,7 +42,7 @@ resource "aws_cloudfront_distribution" "this" {
 
   aliases = [var.site_domain]
 
-  # Cache behavior with precedence 0
+  # Cache behavior with precedence 1
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -66,7 +66,7 @@ resource "aws_cloudfront_distribution" "this" {
     compress               = true
   }
 
-  # Cache behavior with precedence 1
+  # Cache behavior with precedence 0
 
   ordered_cache_behavior {
     path_pattern     = "/wp-content/uploads"
